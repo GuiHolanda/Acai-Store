@@ -9,8 +9,8 @@ import { Card } from "../components/UI/Card";
 export const HomePage = () => {
   return (
     <>
-      <section className="mb-6">
-        <h2 className="text-2xl pt-8 pb-5">Destaques</h2>
+      <section className="mb-6 w-fit mx-auto">
+        <h2 className="text-lg sm:text-2xl pt-4 sm:pt-8 pb-5">Destaques</h2>
         <div className="flex flex-wrap gap-8">
           <Card
             title="4 Açais com ou sem banana"
@@ -33,8 +33,10 @@ export const HomePage = () => {
           />
         </div>
       </section>
-      <section className="mb-6">
-        <h2 className="text-2xl pt-8 pb-5">Promoções Impedíveis</h2>
+      <section className="mb-6 w-fit mx-auto">
+        <h2 className="text-lg sm:text-2xl pt-4 sm:pt-8 pb-5">
+          Promoções Impedíveis
+        </h2>
         <div className="flex flex-wrap gap-8">
           <Card
             title="4 Açais com ou sem banana"
