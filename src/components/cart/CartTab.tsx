@@ -3,6 +3,7 @@ import type { RootState } from "../../store/store";
 import { CartItem } from "./CartItem";
 import { XLg } from "react-bootstrap-icons";
 import { toggleIsShowing } from "../../store/cartSlice";
+import { Backdrop } from "../UI/Modal";
 
 export const CartTab = () => {
   const isShowing = useSelector((state: RootState) => state.cart.isShowing);
@@ -11,10 +12,7 @@ export const CartTab = () => {
   if (isShowing) {
     return (
       <>
-        <div
-          className="fixed top-[81px] bg-neutral-900/25 right-0 w-full h-full"
-          onClick={() => dispatch(toggleIsShowing())}
-        ></div>
+        <Backdrop onClick={() => dispatch(toggleIsShowing())} />
 
         <div className="fixed flex flex-col py-4 bg-white right-0 top-0 sm:top-[81px] bottom-0 sm:w-[472px]">
           <header className="mb-5 px-6 sm:px-11 flex gap-4 items-center justify-between">

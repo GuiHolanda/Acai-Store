@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import { RootLayoutPage } from "./pages/RootLayout.tsx";
 import { HomePage } from "./pages/Home.tsx";
+import { ProductsContextProvider } from "./context/Products-context.tsx";
 
 const router = createBrowserRouter([
   {
@@ -12,5 +13,9 @@ const router = createBrowserRouter([
 ]);
 
 export function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <ProductsContextProvider>
+      <RouterProvider router={router} />;
+    </ProductsContextProvider>
+  );
 }

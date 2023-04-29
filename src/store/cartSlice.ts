@@ -4,9 +4,9 @@ export interface CartState {
   isShowing: boolean;
 }
 
-const initialState: CartState = {
+const initialState = {
   isShowing: false,
-};
+} as CartState;
 
 export const cartSlice = createSlice({
   name: "cart",
