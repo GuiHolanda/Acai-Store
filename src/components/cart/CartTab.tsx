@@ -12,11 +12,14 @@ export const CartTab = () => {
   if (isShowing) {
     return (
       <>
-        <Backdrop onClick={() => dispatch(toggleIsShowing())} />
+        <Backdrop
+          onClick={() => dispatch(toggleIsShowing())}
+          className="top-[81px]"
+        />
 
-        <div className="fixed flex flex-col py-4 bg-white right-0 top-0 sm:top-[81px] bottom-0 sm:w-[472px]">
-          <header className="mb-5 px-6 sm:px-11 flex gap-4 items-center justify-between">
-            <h2 className="text-2xl">Seu Carrinhoo</h2>
+        <div className="fixed flex flex-col py-4 bg-white right-0 top-0 sm:top-[81px] bottom-0 sm:w-[472px] z-20">
+          <header className="mb-5 px-6 sm:px-11 flex items-center justify-between">
+            <h2 className="text-2xl">Seu Carrinho</h2>
             <button
               onClick={() => dispatch(toggleIsShowing())}
               className="sm:translate-x-5"
@@ -42,7 +45,7 @@ export const CartTab = () => {
                 <p className="text-light-gray">R$ 6,00</p>
               </div>
             </div>
-            <div className=" flex justify-between items-center">
+            <div className="flex justify-between items-center">
               <p className="text-lg">Total</p>
               <p>R$ 91,99</p>
             </div>

@@ -1,10 +1,15 @@
 import { PropsWithChildren } from "react";
 import ReactDOM from "react-dom";
 
-export const Backdrop = ({ onClick }: { onClick: () => void }) => {
+interface BackdropProps {
+  onClick: () => void;
+  className?: string;
+}
+
+export const Backdrop = ({ onClick, className }: BackdropProps) => {
   return (
     <div
-      className="fixed top-[81px] bg-neutral-900/25 right-0 w-full h-full"
+      className={`fixed top-0 right-0 w-full h-full z-10 bg-neutral-900/25 ${className}`}
       onClick={onClick}
     ></div>
   );
@@ -12,8 +17,8 @@ export const Backdrop = ({ onClick }: { onClick: () => void }) => {
 
 export const ModalOverlay = (props: PropsWithChildren) => {
   return (
-    <div className="fixed top-[20vh] left-[20%] w-[60%] h-[60vh] bg-white p-4 rounded shadow-md z-10">
-      <div>{props.children}</div>
+    <div className="fixed top-0 md:top-[20vh] lef-0 lg:left-[5%] xl:left-[15%]  w-full lg:w-[90%] xl:w-[70%] h-full md:h-[58vh] bg-white p-4 rounded shadow-md z-20">
+      {props.children}
     </div>
   );
 };
