@@ -33,6 +33,7 @@ export const HomePage = () => {
             ))}
         </div>
       </section>
+
       <section className="mb-6 w-fit mx-auto">
         <h2 className="text-lg sm:text-2xl pt-4 sm:pt-8 pb-5 sm:text-left text-center">
           Promoções Impedíveis

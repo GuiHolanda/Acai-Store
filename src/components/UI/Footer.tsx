@@ -2,7 +2,7 @@ import { Facebook } from "react-bootstrap-icons";
 import { Twitter } from "react-bootstrap-icons";
 import { Youtube } from "react-bootstrap-icons";
 import { Instagram } from "react-bootstrap-icons";
-import Logo from "../assets/images/logo.png";
+import Logo from "../../assets/images/logo.png";
 
 export const Footer = () => {
   return (

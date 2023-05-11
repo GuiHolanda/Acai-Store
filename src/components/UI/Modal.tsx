@@ -9,7 +9,7 @@ interface BackdropProps {
 export const Backdrop = ({ onClick, className }: BackdropProps) => {
   return (
     <div
-      className={`fixed top-0 right-0 w-full h-full z-10 bg-neutral-900/25 ${className}`}
+      className={`fixed top-0 right-0 w-full h-full z-20 bg-neutral-900/25 ${className}`}
       onClick={onClick}
     ></div>
   );
@@ -17,7 +17,7 @@ export const Backdrop = ({ onClick, className }: BackdropProps) => {
 
 export const ModalOverlay = (props: PropsWithChildren) => {
   return (
-    <div className="fixed top-0 md:top-[20vh] lef-0 lg:left-[5%] xl:left-[15%]  w-full lg:w-[90%] xl:w-[70%] h-full md:h-[58vh] bg-white p-4 rounded shadow-md z-20">
+    <div className="fixed top-0 md:top-[20vh] lg:top-[20vh] lef-0 md:left-[5%] xl:left-[15%]  w-full md:w-[90%] xl:w-[70%] h-full md:h-[58vh] md:max-h-[584px] bg-white p-4 rounded shadow-md z-30 overflow-auto">
       {props.children}
     </div>
   );

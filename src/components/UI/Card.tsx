@@ -5,6 +5,10 @@ import { setProduct, toggleVisibility } from "../../store/productModalSlice";
 export const Card = ({ product }: { product: Product }) => {
   const { title, image, description, price } = product;
   const dispatch = useDispatch();
+  const formatedPrice = price.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
 
   function cardClickHandler() {
     dispatch(toggleVisibility());
@@ -14,7 +18,7 @@ export const Card = ({ product }: { product: Product }) => {
   return (
     <div
       onClick={cardClickHandler}
-      className="border flex flex-col gap-8 shadow-sm rounded-xl border-slate-100 min-h-[378px] sm:w-[398px] hover:scale-[102%] cursor-pointer"
+      className="border flex flex-col gap-8 shadow-sm rounded-xl border-slate-100 min-h-[378px] max-w-[398px] md:min-w-[398px] hover:scale-[102%] cursor-pointer"
     >
       <img
         src={image}
@@ -27,7 +31,7 @@ export const Card = ({ product }: { product: Product }) => {
           <p className="text-sm text-zinc-500 mb-3">{description}</p>
         </div>
 
-        <p className="text-green-600 px-5 pb-3">{price}</p>
+        <p className="text-green-600 px-5 pb-3">{formatedPrice}</p>
       </div>
     </div>
   );
