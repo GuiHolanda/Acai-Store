@@ -6,14 +6,21 @@ import baquete from "../assets/images/sanduiche-com-almondegas.jpg";
 import tapioca from "../assets/images/tapioca.jpg";
 import suco from "../assets/images/dextoxmor.jpg";
 
+export interface IOption {
+  name: string;
+  price?: number;
+  description?: string;
+  canUpdatePrice?: boolean;
+}
 export interface IOptionals {
   name: string;
   description: string;
   isMandatory: boolean;
-  options: { name: string; price?: number; description?: string }[];
+  maxQtd: number;
+  options: IOption[];
 }
 
-export interface Product {
+export interface IProduct {
   id: string;
   title: string;
   description: string;
@@ -24,10 +31,10 @@ export interface Product {
 }
 
 interface IProductsContext {
-  products: Product[];
+  products: IProduct[];
 }
 
-const DUMMY_PRODUCTS: Product[] = [
+const DUMMY_PRODUCTS: IProduct[] = [
   {
     id: "p1",
     title: "4 Açais com ou sem banana",
@@ -41,24 +48,29 @@ const DUMMY_PRODUCTS: Product[] = [
         name: "Como prefere ?",
         description: "Escolha 1 opção",
         isMandatory: true,
+        maxQtd: 1,
         options: [
           {
             name: "Brasil com bananas e morangos",
             description: "com morangos e bananas fatiadas",
             price: 27.3,
+            canUpdatePrice: true,
           },
           {
             name: "Brasil com morangos",
             description: "com morangos fatiados",
             price: 27.3,
+            canUpdatePrice: true,
           },
           {
             name: "Com bananas Fatiadas",
             price: 23.4,
+            canUpdatePrice: true,
           },
           {
             name: "Sem frutas",
             price: 23.4,
+            canUpdatePrice: true,
           },
         ],
       },
@@ -66,6 +78,7 @@ const DUMMY_PRODUCTS: Product[] = [
         name: "Escolha uma porção: ",
         description: "Escolha 1 opção",
         isMandatory: true,
+        maxQtd: 1,
         options: [
           { name: "Granola" },
           { name: "Farinha Láctea" },
@@ -79,6 +92,7 @@ const DUMMY_PRODUCTS: Product[] = [
         name: "Deseja Adicionar algo?",
         description: "Escolha até 20 opções",
         isMandatory: false,
+        maxQtd: 20,
         options: [
           {
             name: "Morango",
@@ -129,6 +143,7 @@ const DUMMY_PRODUCTS: Product[] = [
         name: "Acréscimo de viagem:",
         isMandatory: true,
         description: "Escolha 1 opção.",
+        maxQtd: 1,
         options: [{ name: "Embalagem para viagem", price: 2.5 }],
       },
     ],
@@ -146,13 +161,15 @@ const DUMMY_PRODUCTS: Product[] = [
         name: "Mini Salada",
         isMandatory: true,
         description: "Excolha 1 opção",
-        options: [{ name: "Sim" }, { name: "Não" }],
+        maxQtd: 1,
+        options: [{ name: "Salda sim" }, { name: "Salada não" }],
       },
       {
         name: "Talher Descartável",
         isMandatory: true,
         description: "Excolha 1 opção",
-        options: [{ name: "Sim" }, { name: "Não" }],
+        maxQtd: 1,
+        options: [{ name: "Talher sim" }, { name: "Talher não" }],
       },
     ],
   },
@@ -168,6 +185,7 @@ const DUMMY_PRODUCTS: Product[] = [
         name: "Acréscimo de viagem:",
         isMandatory: true,
         description: "Escolha 1 opção.",
+        maxQtd: 1,
         options: [{ name: "Embalagem para viagem", price: 2.5 }],
       },
     ],
@@ -184,13 +202,15 @@ const DUMMY_PRODUCTS: Product[] = [
         name: "Acréscimo de viagem:",
         isMandatory: true,
         description: "Escolha 1 opção.",
+        maxQtd: 1,
         options: [{ name: "Embalagem para viagem", price: 2.5 }],
       },
       {
         name: "Talher Descartável",
         isMandatory: true,
         description: "Excolha 1 opção",
-        options: [{ name: "Sim" }, { name: "Não" }],
+        maxQtd: 1,
+        options: [{ name: "Talher sim" }, { name: "Talher não" }],
       },
     ],
   },
@@ -206,6 +226,7 @@ const DUMMY_PRODUCTS: Product[] = [
         name: "Acrescentar!",
         isMandatory: true,
         description: "Escolha 1 opção.",
+        maxQtd: 1,
         options: [
           { name: "Batido com Leite", price: 2.7 },
           { name: "Sem Leite" },
@@ -215,7 +236,8 @@ const DUMMY_PRODUCTS: Product[] = [
         name: "Canudo",
         isMandatory: true,
         description: "Escolha 1 opção.",
-        options: [{ name: "Sim" }, { name: "Não" }],
+        maxQtd: 1,
+        options: [{ name: "Canudo sim" }, { name: "Canudo não" }],
       },
     ],
   },

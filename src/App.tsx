@@ -4,6 +4,7 @@ import { RootLayoutPage } from "./pages/RootLayout.tsx";
 import { HomePage } from "./pages/Home.tsx";
 import { ProductsContextProvider } from "./context/Products-context.tsx";
 import { Orders } from "./pages/Orders.tsx";
+import { ToasterProvider } from "./context/Toaster-context.tsx";
 
 const router = createBrowserRouter([
   {
@@ -18,8 +19,10 @@ const router = createBrowserRouter([
 
 export function App() {
   return (
-    <ProductsContextProvider>
-      <RouterProvider router={router} />;
-    </ProductsContextProvider>
+    <ToasterProvider>
+      <ProductsContextProvider>
+        <RouterProvider router={router} />;
+      </ProductsContextProvider>
+    </ToasterProvider>
   );
 }

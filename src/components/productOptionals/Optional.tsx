@@ -2,10 +2,19 @@ import { CheckLg } from "react-bootstrap-icons";
 import { QuantityButton } from "./QuantityButton";
 import { useDispatch } from "react-redux";
 import {
+  addOption,
   addOptionalToPrice,
+  removeOption,
   removeOptionalToPrice,
+  updatePrice,
 } from "../../store/productModalSlice";
+import { IOption, IOptionals } from "../../context/Products-context";
 
+export interface ISelectedOption {
+  selectedValue: string;
+  optionalHeader: string;
+  maxQtd: number;
+}
 interface OptionalHeaderProps {
   title: string;
   instruction: string;
@@ -14,20 +23,14 @@ interface OptionalHeaderProps {
 }
 
 interface OptionalItemRadioProps {
-  title: string;
-  description?: string;
-  price?: number;
-  onChange: (information: {
-    selectedValue: string;
-    optionalHeader: string;
-  }) => void;
-  optionalHeader: string;
+  option: IOption;
+  optional: IOptionals;
+  onChange: (information: ISelectedOption) => void;
 }
 
 interface OptionalItemQtdProps {
-  title: string;
-  description?: string;
-  price?: number;
+  option: IOption;
+  optional: IOptionals;
 }
 
 interface OptionalRootProps {
@@ -52,16 +55,32 @@ const OptionalHeader = (props: OptionalHeaderProps) => {
 };
 
 const OptionalItemRadio = (props: OptionalItemRadioProps) => {
-  const { title, description, price, onChange, optionalHeader } = props;
+  const { name, description, price, canUpdatePrice } = props.option;
+  const { maxQtd, name: optionalHeader } = props.optional;
+  const { onChange } = props;
+  const dispatch = useDispatch();
 
   function radioChangeHandler(event: React.FormEvent<HTMLInputElement>) {
     const selectedValue = event.currentTarget.value;
-    onChange({ selectedValue, optionalHeader });
+    const information: ISelectedOption = {
+      selectedValue,
+      optionalHeader,
+      maxQtd,
+    };
+    onChange(information);
+
+    if (price && canUpdatePrice) {
+      dispatch(updatePrice(price));
+    } else if (price && !canUpdatePrice) {
+      dispatch(addOptionalToPrice(price));
+    }
+
+    dispatch(addOption(information));
   }
   return (
     <div className="flex justify-between items-center border-b border-slate-100 py-4 px-10">
       <label htmlFor="garnish-radio-01">
-        <p className="font-light">{title}</p>
+        <p className="font-light">{name}</p>
         <p className="text-light-gray font-light">{description}</p>
         <p className="font-light">
           {price?.toLocaleString("pt-BR", {
@@ -75,32 +94,35 @@ const OptionalItemRadio = (props: OptionalItemRadioProps) => {
         name={optionalHeader}
         className="w-6 h-6 accent-primary"
         onChange={radioChangeHandler}
-        value={title}
+        value={name}
       />
     </div>
   );
 };
 
 const OptionalItemQtd = (props: OptionalItemQtdProps) => {
-  const { title, description, price } = props;
+  const { name, description, price } = props.option;
+  const { maxQtd, name: optionalHeader } = props.optional;
   const dispatch = useDispatch();
 
   function increaseHandler() {
     if (price) {
       dispatch(addOptionalToPrice(price));
+      dispatch(addOption({ selectedValue: name, optionalHeader, maxQtd }));
     }
   }
 
   function decreaseHandler() {
     if (price) {
       dispatch(removeOptionalToPrice(price));
+      dispatch(removeOption(name));
     }
   }
 
   return (
     <div className="flex justify-between items-center border-b  border-slate-100 py-4 px-10">
       <label htmlFor="garnish-radio-01">
-        <p className="font-light">{title}</p>
+        <p className="font-light">{name}</p>
         <p className="text-light-gray font-light">{description}</p>
         <p className="font-light">
           {price?.toLocaleString("pt-BR", {

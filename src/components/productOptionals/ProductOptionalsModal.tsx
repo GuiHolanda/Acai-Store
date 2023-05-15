@@ -4,23 +4,38 @@ import {
   removeOrderQtd,
   resetOrder,
   toggleVisibility,
-  updatePrice,
 } from "../../store/productModalSlice";
 import { XLg } from "react-bootstrap-icons";
 import { RootState } from "../../store/store";
 import { QuantityButton } from "./QuantityButton";
-import { Optional } from "./Optional";
-import { useState } from "react";
+import { ISelectedOption, Optional } from "./Optional";
+import { useContext, useState } from "react";
+import { ProductsContext } from "../../context/Products-context";
+import { ICartItem, addItemToCart } from "../../store/cartSlice";
+import { useToast } from "../../hooks/useToaster";
 
 export const ProductOptionalsModal = () => {
   const dispatch = useDispatch();
+  const toaster = useToast();
+  const { products } = useContext(ProductsContext);
   const product = useSelector((state: RootState) => state.productModal.product);
+  const totalQtd = useSelector(
+    (state: RootState) => state.productModal.totalQtd
+  );
+
+  const productPrice = products
+    .find((prod) => prod.title === product.title)
+    ?.price.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+
+  const selectedOptions = useSelector(
+    (state: RootState) => state.productModal.selectedOptionals
+  );
   const totalPrice = useSelector(
     (state: RootState) => state.productModal.totalPrice
-  ).toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  });
+  );
 
   const [optionals, setOptionals] = useState(
     product.optionals
@@ -28,10 +43,7 @@ export const ProductOptionalsModal = () => {
       .map((optional) => ({ optionalName: optional.name, isValid: false }))
   );
 
-  function optionalChangeHandler(information: {
-    selectedValue: string;
-    optionalHeader: string;
-  }) {
+  function optionalChangeHandler(information: ISelectedOption) {
     setOptionals((prevState) => {
       const selectedOptionalIndex = prevState?.findIndex(
         (optional) => optional.optionalName === information.optionalHeader
@@ -45,16 +57,6 @@ export const ProductOptionalsModal = () => {
         }
       });
     });
-
-    const selectedOptionalPrice = product.optionals
-      ?.find((optional) => optional.name === information.optionalHeader)
-      ?.options.find(
-        (option) => option.name === information.selectedValue
-      )?.price;
-
-    if (selectedOptionalPrice) {
-      dispatch(updatePrice(selectedOptionalPrice));
-    }
   }
 
   function increaseOrderQtdHandler() {
@@ -70,7 +72,25 @@ export const ProductOptionalsModal = () => {
     dispatch(resetOrder());
   }
 
-  //const formIsValid = optionals?.every((optional) => optional.isValid === true);
+  const formIsValid = optionals?.every((optional) => optional.isValid === true);
+
+  function addToCartHandler() {
+    const cartItem: ICartItem = {
+      name: product.title,
+      qtd: totalQtd,
+      optionals: selectedOptions,
+      price: totalPrice,
+    };
+
+    if (formIsValid) {
+      dispatch(addItemToCart(cartItem));
+      closeModalHandler();
+    } else {
+      toaster.open(
+        "É preciso escolher todos os itens obrigatórios antes de adicionar o prato à sacola."
+      );
+    }
+  }
 
   return (
     <div className="flex flex-col md:flex-row gap-3 lg:gap-5 h-full">
@@ -93,12 +113,7 @@ export const ProductOptionalsModal = () => {
         <div className="px-10">
           <p className="text-light-gray">{product.description}</p>
           <p className="my-2">Serve 1 pessoa</p>
-          <p className="font-light">
-            {product.price.toLocaleString("pt-BR", {
-              style: "currency",
-              currency: "BRL",
-            })}
-          </p>
+          <p className="font-light">{productPrice}</p>
         </div>
 
         <main className="max-h-72 lg:max-h-80 overflow-auto ">
@@ -119,11 +134,9 @@ export const ProductOptionalsModal = () => {
                 {optional.isMandatory &&
                   optional.options.map((option) => (
                     <Optional.Radio
-                      optionalHeader={optional.name}
                       key={option.name}
-                      title={option.name}
-                      description={option.description}
-                      price={option.price}
+                      optional={optional}
+                      option={option}
                       onChange={optionalChangeHandler}
                     />
                   ))}
@@ -131,9 +144,8 @@ export const ProductOptionalsModal = () => {
                   optional.options.map((option) => (
                     <Optional.Qtd
                       key={option.name}
-                      title={option.name}
-                      description={option.description}
-                      price={option.price}
+                      optional={optional}
+                      option={option}
                     />
                   ))}
               </Optional.Root>
@@ -162,9 +174,19 @@ export const ProductOptionalsModal = () => {
             onIncrease={increaseOrderQtdHandler}
             onDecrease={decreaseOrderQtdHandler}
           />
-          <button className="flex sm: w-48 lg:w-64 h-12 items-center justify-between bg-primary text-white font-semibold px-5 rounded-md">
+          <button
+            className={`flex sm: w-48 lg:w-64 h-12 items-center justify-between ${
+              formIsValid ? "bg-primary" : "bg-purple-200"
+            } text-white font-semibold px-5 rounded-md`}
+            onClick={addToCartHandler}
+          >
             <span className="text-sm">Adicionar</span>
-            <span className="text-sm">{totalPrice}</span>
+            <span className="text-sm">
+              {totalPrice.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              })}
+            </span>
           </button>
         </div>
       </div>

@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
-import { Product } from "../../context/Products-context";
+import { IProduct } from "../../context/Products-context";
 import { setProduct, toggleVisibility } from "../../store/productModalSlice";
 
-export const Card = ({ product }: { product: Product }) => {
+export const Card = ({ product }: { product: IProduct }) => {
   const { title, image, description, price } = product;
   const dispatch = useDispatch();
   const formatedPrice = price.toLocaleString("pt-BR", {
