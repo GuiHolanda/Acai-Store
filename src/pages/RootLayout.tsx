@@ -1,16 +1,13 @@
 import { Outlet } from "react-router-dom";
 import { Header } from "../components/UI/Header";
-
 import { CartTab } from "../components/cart/CartTab";
 import { Footer } from "../components/UI/Footer";
-import { Toaster } from "../components/UI/Toaster";
 
 export const RootLayoutPage = () => {
   return (
     <>
       <Header />
       <CartTab />
-
       <main className="flex flex-col px-5 container mx-auto my-20">
         <div className="flex-grow mb-8">
           <Outlet />

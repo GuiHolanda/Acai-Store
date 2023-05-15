@@ -5,7 +5,7 @@ import { Modal } from "../components/UI/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleVisibility } from "../store/productModalSlice";
 import { RootState } from "../store/store";
-import { ProductOptionalsModal } from "../components/productOptionals/ProductOptionalsModal";
+import { ProductModal } from "../components/productModal/ProductModal";
 
 export const HomePage = () => {
   const { products } = useContext(ProductsContext);
@@ -18,7 +18,7 @@ export const HomePage = () => {
     <>
       {productModalVisible.isVisible && (
         <Modal onClose={() => dispatch(toggleVisibility())}>
-          <ProductOptionalsModal />
+          <ProductModal />
         </Modal>
       )}
       <section className="mb-6 w-fit mx-auto">

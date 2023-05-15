@@ -14,7 +14,7 @@ import { ProductsContext } from "../../context/Products-context";
 import { ICartItem, addItemToCart } from "../../store/cartSlice";
 import { useToast } from "../../hooks/useToaster";
 
-export const ProductOptionalsModal = () => {
+export const ProductModal = () => {
   const dispatch = useDispatch();
   const toaster = useToast();
   const { products } = useContext(ProductsContext);

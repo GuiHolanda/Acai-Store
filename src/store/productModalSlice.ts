@@ -1,4 +1,4 @@
-import { ISelectedOption } from "./../components/productOptionals/Optional";
+import { ISelectedOption } from "../components/productModal/Optional";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IProduct } from "../context/Products-context";
 
