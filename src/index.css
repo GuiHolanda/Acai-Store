@@ -13,3 +13,22 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+#overlays ::-webkit-scrollbar {
+  width: 3px;
+}
+
+#overlays ::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 5px;
+}
+
+#overlays ::-webkit-scrollbar-thumb {
+  background-color: rgba(168, 167, 167, 0.658);
+  border-radius: 10px;
+  border: 1px solid rgba(175, 175, 175, 0.678);
+}

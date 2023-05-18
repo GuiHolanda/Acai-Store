@@ -2,41 +2,41 @@ import { Facebook } from "react-bootstrap-icons";
 import { Twitter } from "react-bootstrap-icons";
 import { Youtube } from "react-bootstrap-icons";
 import { Instagram } from "react-bootstrap-icons";
-import Logo from "../assets/images/logo.png";
+import Logo from "../../assets/images/logo.png";
 
 export const Footer = () => {
   return (
-    <footer>
-      <section className="border-t  pt-10 pb-3">
-        <h2 className="text-xl mb-8">Nossas lojas</h2>
+    <footer className="text-center sm:text-left">
+      <section className="border-t pt-5 sm:pt-10 pb-3">
+        <h2 className="sm:text-xl mb-4 sm:mb-8">Nossas lojas</h2>
         <ul className="grid grid-cols-2 sm:grid-cols-4 text-light-gray mb-8 gap-4">
           <li>
-            <a href="/" className="hover:text-dark-gray">
+            <a href="/" className="text-sm sm:text-base hover:text-dark-gray">
               Belo Horizonte
             </a>
           </li>
           <li>
-            <a href="/" className="hover:text-dark-gray">
+            <a href="/" className="text-sm sm:text-base hover:text-dark-gray">
               Brasília
             </a>
           </li>
           <li>
-            <a href="/" className="hover:text-dark-gray">
+            <a href="/" className="text-sm sm:text-base hover:text-dark-gray">
               Campinas
             </a>
           </li>
           <li>
-            <a href="/" className="hover:text-dark-gray">
+            <a href="/" className="text-sm sm:text-base hover:text-dark-gray">
               Curitiba
             </a>
           </li>
           <li>
-            <a href="/" className="hover:text-dark-gray">
+            <a href="/" className="text-sm sm:text-base hover:text-dark-gray">
               Goiânia
             </a>
           </li>
           <li>
-            <a href="/" className="hover:text-dark-gray">
+            <a href="/" className="text-sm sm:text-base hover:text-dark-gray">
               Guarulhos
             </a>
           </li>
@@ -46,72 +46,84 @@ export const Footer = () => {
       <section className="border-t  pt-10 pb-3">
         <div className="grid grid-cols-2 sm:grid-cols-4">
           <div>
-            <h2 className="text-xl mb-8">Açai</h2>
+            <h2 className="sm:text-xl mb-4 sm:mb-8">Açai</h2>
             <ul className="grid grid-cols-1 text-light-gray mb-8 gap-4">
               <li>
-                <a href="/" className="hover:text-dark-gray">
+                <a
+                  href="/"
+                  className="text-sm sm:text-base hover:text-dark-gray"
+                >
                   Site Institucional
                 </a>
               </li>
               <li>
-                <a href="/" className="hover:text-dark-gray">
+                <a
+                  href="/"
+                  className="text-sm sm:text-base hover:text-dark-gray"
+                >
                   Fale Conosco
                 </a>
               </li>
               <li>
-                <a href="/" className="hover:text-dark-gray">
+                <a
+                  href="/"
+                  className="text-sm sm:text-base hover:text-dark-gray"
+                >
                   Carreiras
                 </a>
               </li>
             </ul>
           </div>
           <div>
-            <h2 className="text-xl mb-8">Descubra</h2>
+            <h2 className="sm:text-xl mb-4 sm:mb-8">Descubra</h2>
             <ul className="grid grid-cols-1 text-light-gray mb-8 gap-4">
               <li>
-                <a href="/" className="hover:text-dark-gray">
+                <a
+                  href="/"
+                  className="text-sm sm:text-base hover:text-dark-gray"
+                >
                   Belo Horizonte
                 </a>
               </li>
               <li>
-                <a href="/" className="hover:text-dark-gray">
+                <a
+                  href="/"
+                  className="text-sm sm:text-base hover:text-dark-gray"
+                >
                   Brasília
                 </a>
               </li>
               <li>
-                <a href="/" className="hover:text-dark-gray">
+                <a
+                  href="/"
+                  className="text-sm sm:text-base hover:text-dark-gray"
+                >
                   Campinas
                 </a>
               </li>
             </ul>
           </div>
           <div>
-            <h2 className="text-xl mb-8">Social</h2>
-            <ul className="flex text-light-gray mb-8 gap-4">
+            <h2 className="sm:text-xl mb-4 sm:mb-8">Social</h2>
+            <ul className="flex text-light-gray mb-8 gap-4 justify-center sm:justify-start">
               <li>
                 <a href="/">
-                  <Facebook
-                    size={30}
-                    className="text-primary hover:scale-105"
-                  />
+                  <Facebook className="text-primary hover:scale-105 h-4 w-4 sm:h-6 sm:w-6" />
                 </a>
               </li>
               <li>
                 <a href="/">
-                  <Twitter size={30} className="text-primary hover:scale-105" />
+                  <Twitter className="text-primary hover:scale-105 h-4 w-4 sm:h-6 sm:w-6" />
                 </a>
               </li>
               <li>
                 <a href="/">
-                  <Youtube size={30} className="text-primary hover:scale-105" />
+                  <Youtube className="text-primary hover:scale-105 h-4 w-4 sm:h-6 sm:w-6" />
                 </a>
               </li>
               <li>
                 <a href="/">
-                  <Instagram
-                    size={30}
-                    className="text-primary hover:scale-105"
-                  />
+                  <Instagram className="text-primary hover:scale-105 h-4 w-4 sm:h-6 sm:w-6" />
                 </a>
               </li>
             </ul>
@@ -122,22 +134,22 @@ export const Footer = () => {
       <section className="border-t py-10 grid grid-cols-1 sm:grid-cols-2 items-center gap-8 sm:gap-4">
         <ul className="flex flex-wrap justify-center sm:order-2 gap-4 mx-auto text-zinc-500">
           <li>
-            <a href="/" className="hover:text-dark-gray">
+            <a href="/" className="text-sm sm:text-base hover:text-dark-gray">
               Termos e condições de uso
             </a>
           </li>
           <li>
-            <a href="/" className="hover:text-dark-gray">
+            <a href="/" className="text-sm sm:text-base hover:text-dark-gray">
               Código de Conduta
             </a>
           </li>
           <li>
-            <a href="/" className="hover:text-dark-gray">
+            <a href="/" className="text-sm sm:text-base hover:text-dark-gray">
               Privacidade
             </a>
           </li>
           <li>
-            <a href="/" className="hover:text-dark-gray">
+            <a href="/" className="text-sm sm:text-base hover:text-dark-gray">
               Dicas de segurança
             </a>
           </li>

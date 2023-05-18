@@ -1,17 +1,19 @@
 import { Outlet } from "react-router-dom";
-import { Header } from "../components/Header";
-import { Footer } from "../components/Footer";
+import { Header } from "../components/UI/Header";
+import { CartTab } from "../components/cart/CartTab";
+import { Footer } from "../components/UI/Footer";
 
 export const RootLayoutPage = () => {
   return (
-    <div className="flex flex-col h-screen">
+    <>
       <Header />
-      <main className="flex flex-col px-4 container mx-auto h-full">
+      <CartTab />
+      <main className="flex flex-col px-5 container mx-auto my-20">
         <div className="flex-grow mb-8">
           <Outlet />
         </div>
         <Footer />
       </main>
-    </div>
+    </>
   );
 };
