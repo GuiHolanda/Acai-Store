@@ -1,10 +1,5 @@
-import { PropsWithChildren, createContext } from "react";
-import tijelaAcai from "../assets/images/tijela_Açai_01.jpg";
-import hamburguer from "../assets/images/hamburguer.jpg";
-import crepe from "../assets/images/crepe.jpg";
-import baquete from "../assets/images/sanduiche-com-almondegas.jpg";
-import tapioca from "../assets/images/tapioca.jpg";
-import suco from "../assets/images/dextoxmor.jpg";
+import { PropsWithChildren, createContext, useEffect, useState } from "react";
+import useHttp from "../hooks/useHttp";
 
 export interface IOption {
   name: string;
@@ -32,9 +27,11 @@ export interface IProduct {
 
 interface IProductsContext {
   products: IProduct[];
+  isLoading: boolean;
+  error: Error | null;
 }
 
-const DUMMY_PRODUCTS: IProduct[] = [
+/* const DUMMY_PRODUCTS: IProduct[] = [
   {
     id: "p1",
     title: "4 Açais com ou sem banana",
@@ -241,15 +238,40 @@ const DUMMY_PRODUCTS: IProduct[] = [
       },
     ],
   },
-];
+]; */
 
 export const ProductsContext = createContext<IProductsContext>({
-  products: DUMMY_PRODUCTS,
+  products: [],
+  isLoading: false,
+  error: null,
 });
 
 export const ProductsContextProvider = (props: PropsWithChildren) => {
+  const [products, setProducts] = useState<any[]>([]);
+
+  const { error, isLoading, sendRequest } = useHttp();
+
+  useEffect(() => {
+    const transformProducts = (productsObj: any) => {
+      const loadedTasks = [];
+
+      for (const productKey in productsObj) {
+        loadedTasks.push({
+          ...productsObj[productKey],
+        });
+      }
+
+      setProducts(loadedTasks);
+    };
+
+    sendRequest(
+      { url: "https://acai-store-default-rtdb.firebaseio.com/products.json" },
+      transformProducts
+    );
+  }, [sendRequest]);
+
   return (
-    <ProductsContext.Provider value={{ products: DUMMY_PRODUCTS }}>
+    <ProductsContext.Provider value={{ products: products, error, isLoading }}>
       {props.children}
     </ProductsContext.Provider>
   );
