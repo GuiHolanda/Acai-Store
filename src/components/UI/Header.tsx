@@ -8,8 +8,8 @@ import { useState } from "react";
 const DUMMY_NAV_LINKS = [
   { text: "Início", path: "/" },
   { text: "Açais", path: "/acais" },
-  { text: "Bebidas", path: "/bebidas" },
-  { text: "Hamburguers", path: "/hamburguers" },
+  // { text: "Bebidas", path: "/bebidas" },
+  // { text: "Hamburguers", path: "/hamburguers" },
 ];
 
 export const Header = () => {
