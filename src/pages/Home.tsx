@@ -8,7 +8,7 @@ import { RootState } from "../store/store";
 import { ProductModal } from "../components/productModal/ProductModal";
 
 export const HomePage = () => {
-  const { products, isLoading } = useContext(ProductsContext);
+  const { products, isLoading, error } = useContext(ProductsContext);
   const dispatch = useDispatch();
   const productModalVisible = useSelector(
     (state: RootState) => state.productModal
@@ -22,10 +22,10 @@ export const HomePage = () => {
         </Modal>
       )}
       {isLoading && <h1 className="text-2xl text-primary">Loading...</h1>}
-      {!isLoading && (
+      {!isLoading && !error && (
         <>
           <section className="mb-6 w-fit mx-auto">
-            <h2 className="text-lg sm:text-2xl pt-4 sm:pt-8 pb-5 sm:text-left text-center">
+            <h2 className="text-lg sm:text-2xl pt-4 sm:pt-8 pb-5 md:text-left text-center">
               Mais Populares
             </h2>
             <div className="flex flex-wrap gap-8 justify-center lg:justify-evenly">
@@ -38,7 +38,7 @@ export const HomePage = () => {
           </section>
 
           <section className="mb-6 w-fit mx-auto">
-            <h2 className="text-lg sm:text-2xl pt-4 sm:pt-8 pb-5 sm:text-left text-center">
+            <h2 className="text-lg sm:text-2xl pt-4 sm:pt-8 pb-5 md:text-left text-center">
               Promoções Impedíveis
             </h2>
             <div className="flex flex-wrap gap-8 justify-center lg:justify-evenly">
@@ -51,6 +51,8 @@ export const HomePage = () => {
           </section>
         </>
       )}
+
+      {!isLoading && error && <p>{error.message}</p>}
     </>
   );
 };

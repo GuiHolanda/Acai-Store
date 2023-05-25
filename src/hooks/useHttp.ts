@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { authErrorHandler } from "../utils/authErrorHandler";
 
 export interface IRequestConfig {
   url: string;
@@ -9,10 +10,13 @@ export interface IRequestConfig {
 
 const useHttp = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<Error | null>(null);
 
   const sendRequest = useCallback(
-    async (requestConfig: IRequestConfig, applyData: (data: any) => void) => {
+    async (
+      requestConfig: IRequestConfig,
+      applyData: <Type>(data: Type) => void
+    ) => {
       setIsLoading(true);
       setError(null);
       try {
@@ -22,14 +26,16 @@ const useHttp = () => {
           body: requestConfig.body ? JSON.stringify(requestConfig.body) : null,
         });
 
+        const data = await response.json();
+
         if (!response.ok) {
-          throw new Error("Request failed!");
+          const errorMessage = authErrorHandler(data.error.message);
+          throw new Error(errorMessage);
         }
 
-        const data = await response.json();
         applyData(data);
       } catch (error: any) {
-        setError(error.message || "Something went wrong!");
+        setError(error);
       }
       setIsLoading(false);
     },

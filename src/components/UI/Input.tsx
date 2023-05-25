@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, ReactNode } from "react";
+import React, { InputHTMLAttributes, ReactNode } from "react";
 
 export interface IInputRootProps {
   children: ReactNode;
@@ -22,9 +22,11 @@ export const InputIcon = (props: IInputIconProps) => {
   return <i className="text-light-gray w-5">{props.children}</i>;
 };
 
-export const Input = (props: IInputProps) => {
-  return <input className="outline-none w-full" {...props} />;
-};
+export const Input = React.forwardRef<HTMLInputElement, IInputProps>(
+  (props, ref) => {
+    return <input ref={ref} className="outline-none w-full" {...props} />;
+  }
+);
 
 export const InputGroup = {
   Root: InputRoot,
