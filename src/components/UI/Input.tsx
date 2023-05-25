@@ -23,7 +23,7 @@ export const InputIcon = (props: IInputIconProps) => {
 };
 
 export const Input = (props: IInputProps) => {
-  return <input className="outline-none" {...props} />;
+  return <input className="outline-none w-full" {...props} />;
 };
 
 export const InputGroup = {
