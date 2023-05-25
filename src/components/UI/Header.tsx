@@ -1,7 +1,7 @@
 import { PersonCircle, XLg } from "react-bootstrap-icons";
 import { List } from "react-bootstrap-icons";
 import Logo from "../../assets/images/logo.png";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { CartButton } from "../cart/CartButton";
 import { useState } from "react";
 
@@ -90,16 +90,17 @@ export const Header = () => {
             </nav>
           </div>
 
-          <div className="flex gap-3 sm:gap-8">
-            <button
+          <div className="flex gap-3 sm:gap-8 items-center">
+            <Link
+              to="auth?mode=login"
               type="button"
               id="user-menu-button"
               aria-expanded="false"
-              aria-haspopup="true"
+              aria-haspopup="false"
             >
               <span className="sr-only">Open user menu</span>
               <PersonCircle className="text-primary hover:scale-105 h-4 w-4 sm:h-6 sm:w-6" />
-            </button>
+            </Link>
             <CartButton />
           </div>
         </div>
