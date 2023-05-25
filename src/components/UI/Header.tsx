@@ -92,7 +92,7 @@ export const Header = () => {
 
           <div className="flex gap-3 sm:gap-8 items-center">
             <Link
-              to="login"
+              to="auth?mode=login"
               type="button"
               id="user-menu-button"
               aria-expanded="false"

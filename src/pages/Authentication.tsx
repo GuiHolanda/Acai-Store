@@ -2,8 +2,11 @@ import { Envelope, ShieldLock } from "react-bootstrap-icons";
 import Logo from "../assets/images/logo.png";
 import { InputGroup } from "../components/UI/Input";
 import { FormGroup } from "../components/UI/FormGroup";
+import { Link, useSearchParams } from "react-router-dom";
 
-export const LoginPage = () => {
+export const AuthenticationPage = () => {
+  const [searchParams] = useSearchParams();
+  const isLogin = searchParams.get("mode") === "login";
   return (
     <div className="flex h-full">
       <div className="max-w-md shadow-md rounded p-10 mx-auto my-auto">
@@ -49,11 +52,15 @@ export const LoginPage = () => {
             </InputGroup.Root>
           </FormGroup.Root>
           <button className="bg-primary px-4 py-2 w-full rounded-lg text-white font-semibold hover:scale-[105%]">
-            Login
+            {isLogin ? "Login" : "Signup"}
           </button>
           <div className="flex flex-col gap-1 text-center underline underline-offset-2 text-light-gray">
-            <a href="">Esqueceu sua senha ?</a>
-            <a href="">Não possui conta ? Crie uma agora</a>
+            {isLogin && <a href="">Esqueceu sua senha ?</a>}
+            <Link to={`?mode=${isLogin ? "signup" : "login"}`}>
+              {isLogin
+                ? "Não possui conta ? Crie uma agora"
+                : "Já possui conta ? Faça o login aqui."}
+            </Link>
           </div>
         </form>
       </div>

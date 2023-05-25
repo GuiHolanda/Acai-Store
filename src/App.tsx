@@ -5,7 +5,7 @@ import { HomePage } from "./pages/Home.tsx";
 import { ProductsContextProvider } from "./context/Products-context.tsx";
 import { Orders } from "./pages/Orders.tsx";
 import { ToasterProvider } from "./context/Toaster-context.tsx";
-import { LoginPage } from "./pages/Login.tsx";
+import { AuthenticationPage } from "./pages/Authentication.tsx";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
       { path: "orders", element: <Orders /> },
     ],
   },
-  { path: "/login", element: <LoginPage /> },
+  { path: "/auth", element: <AuthenticationPage /> },
 ]);
 
 export function App() {
